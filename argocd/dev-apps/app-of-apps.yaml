@@ -11,11 +11,9 @@ spec:
   source:
     repoURL: git@github.com:ippanpeople/black_box.git
     path: "argocd/dev-apps/"
-    targetRevision: main
+    targetRevision: master
     directory:
       recurse: true
-      kustomize:
-        buildOptions: "--enable-helm"
   syncPolicy:
     automated: {}
     syncOptions:
