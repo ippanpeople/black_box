@@ -4,14 +4,18 @@ metadata:
   name: kube-prometheus-stack
   namespace: argocd
 spec:
-  project: "dev"
-  destination:
-    namespace: monitoring
-    server: "https://kubernetes.default.svc"
+  project: dev
   source:
     repoURL: git@github.com:ippanpeople/black_box.git
-    path: "helm/dev-charts/kube-prometheus-stack"
+    targetRevision: master
+    path: helm/dev-charts/kube-prometheus-stack
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
   syncPolicy:
-    automated: {}
-    syncOptions:
-      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
