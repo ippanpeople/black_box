@@ -11,8 +11,6 @@ spec:
   source:
     repoURL: git@github.com:ippanpeople/black_box.git
     path: "helm/dev-charts/kube-prometheus-stack"
-    plugin:
-      name: argocd-vault-plugin-kustomize-helmcharts
   syncPolicy:
     automated: {}
     syncOptions:

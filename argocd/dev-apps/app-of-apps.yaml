@@ -14,6 +14,8 @@ spec:
     targetRevision: main
     directory:
       recurse: true
+      kustomize:
+        buildOptions: "--enable-helm"
   syncPolicy:
     automated: {}
     syncOptions:

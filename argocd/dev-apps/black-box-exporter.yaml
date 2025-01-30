@@ -11,8 +11,6 @@ spec:
   source:
     repoURL: git@github.com:ippanpeople/black_box.git
     path: "helm/dev-charts/black-box-exporter"
-    plugin:
-      name: argocd-vault-plugin-kustomize-helmcharts
   syncPolicy:
     automated: {}
     syncOptions:
