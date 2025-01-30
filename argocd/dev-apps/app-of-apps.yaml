@@ -1,20 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dev-apps
+  name: app-of-apps
   namespace: argocd
 spec:
-  project: "dev"
-  destination:
-    namespace: monitoring
-    server: "https://kubernetes.default.svc"
+  project: dev
   source:
     repoURL: git@github.com:ippanpeople/black_box.git
-    path: "argocd/dev-apps/"
     targetRevision: master
-    directory:
-      recurse: true
+    path: argocd/dev-apps
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
   syncPolicy:
-    automated: {}
-    syncOptions:
-      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
