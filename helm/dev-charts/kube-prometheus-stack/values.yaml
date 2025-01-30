@@ -1,0 +1,22 @@
+grafana:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: dev1-cluster-issuer
+    hosts:
+      - grafana.dev1.shared-k8s.com
+    tls:
+      - secretName: grafana-dev1-tls
+        hosts:
+          - grafana.dev1.shared-k8s.com
+prometheus:
+  prometheusSpec:
+    remoteWrite:
+      - url: "https://30001.metrics.dev1.com/prometheus/api/v1/write"
+        basicAuth:
+          username:
+            name: prometheus-secret
+            key: username
+          password:
+            name: prometheus-secret
+            key: password

@@ -1,0 +1,7 @@
+helmCharts:
+  - name: prometheus-blackbox-exporter
+    repo: https://prometheus-community.github.io/helm-charts
+    version: "7.9.0"
+    namespace: monitoring
+    releaseName: black-box-exporter
+    valuesFile: values.yaml
