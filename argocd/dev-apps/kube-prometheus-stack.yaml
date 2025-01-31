@@ -12,11 +12,11 @@ spec:
       helm:
         releaseName: kube-prometheus-stack
         skipCrds: true
-    - repoURL: 'git@github.com:ippanpeople/black_box.git'  # ✅ 確保這裡是 `black_box.git`
-      targetRevision: HEAD
-      helm:
         valueFiles:
-          - helm/dev-charts/kube-prometheus-stack/values.yaml
+        - $values/helm/dev-charts/kube-prometheus-stack/values.yaml
+    - repoURL: 'git@github.com:ippanpeople/black_box.git'  
+      targetRevision: HEAD
+      ref: values
   destination:
     server: "https://kubernetes.default.svc"
     namespace: monitoring
