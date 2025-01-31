@@ -4,18 +4,26 @@ metadata:
   name: kube-prometheus-stack
   namespace: argocd
 spec:
-  project: dev
-  source:
-    repoURL: git@github.com:ippanpeople/black_box.git
-    targetRevision: master
-    path: helm/dev-charts/kube-prometheus-stack
-    helm:
-      valueFiles:
-        - values.yaml
+  project: default
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      targetRevision: 62.3.1
+      helm:
+        releaseName: kube-prometheus-stack
+        skipCrds: true
+    - repoURL: 'git@github.com:ippanpeople/black_box.git'
+      targetRevision: HEAD
+      path: helm/dev-charts/kube-prometheus-stack
+      helm:
+        valueFiles:
+          - values.yaml
   destination:
-    server: https://kubernetes.default.svc
+    server: "https://kubernetes.default.svc"
     namespace: monitoring
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

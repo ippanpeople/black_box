@@ -4,11 +4,14 @@ metadata:
   name: app-of-apps
   namespace: argocd
 spec:
-  project: dev
+  project: default
   source:
     repoURL: git@github.com:ippanpeople/black_box.git
     targetRevision: master
     path: argocd/dev-apps
+    directory:
+      recurse: true
+      exclude: 'argocd/dev-apps/project.yaml'
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

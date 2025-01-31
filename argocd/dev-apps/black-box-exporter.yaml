@@ -4,7 +4,7 @@ metadata:
   name: black-box-exporter
   namespace: argocd
 spec:
-  project: dev
+  project: default
   source:
     repoURL: git@github.com:ippanpeople/black_box.git
     targetRevision: master
