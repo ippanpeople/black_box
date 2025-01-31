@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   project: default
-    sources:
+  sources:
     - repoURL: https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
       targetRevision: 62.3.1
@@ -13,10 +13,13 @@ spec:
         releaseName: kube-prometheus-stack
         skipCrds: true  # Skip CRD installation as it's handled by the other app
         valueFiles:
-          - $values/helm/dev-charts/kube-prometheus-stack/values.yaml
-    - repoURL: 'https://github.sakura.codes/w-rin/shared-k8s-dev.git'
+          - helm/dev-charts/kube-prometheus-stack/values.yaml
+    - repoURL: 'git@github.com:ippanpeople/black_box.git'
       targetRevision: HEAD
-      ref: values
+      path: helm/dev-charts/kube-prometheus-stack
+      helm:
+        valueFiles:
+          - values.yaml  
   destination:
     server: "https://kubernetes.default.svc"
     namespace: monitoring
