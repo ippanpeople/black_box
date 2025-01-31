@@ -12,7 +12,7 @@ spec:
       helm:
         releaseName: kube-prometheus-stack
         skipCrds: true
-    - repoURL: 'git@github.com:ippanpeople/black_box.git'
+    - repoURL: 'git@github.com:ippanpeople/black_box.git'  # ✅ 確保這裡是 `black_box.git`
       targetRevision: HEAD
       path: helm/dev-charts/kube-prometheus-stack
       helm:
