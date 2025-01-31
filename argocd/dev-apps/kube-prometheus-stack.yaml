@@ -12,12 +12,12 @@ spec:
       helm:
         releaseName: kube-prometheus-stack
         skipCrds: true
-    - repoURL: 'https://github.sakura.codes/w-rin/shared-k8s-dev.git'
+    - repoURL: 'git@github.com:ippanpeople/black_box.git'
       targetRevision: HEAD
-      path: helm/dev-charts/kube-prometheus-stack  # ✅ 確保這個 path 是對的
+      path: helm/dev-charts/kube-prometheus-stack
       helm:
         valueFiles:
-          - values.yaml  # ✅ 確保這個文件存在
+          - values.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: monitoring
