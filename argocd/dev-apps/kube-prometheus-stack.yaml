@@ -11,15 +11,13 @@ spec:
       targetRevision: 62.3.1
       helm:
         releaseName: kube-prometheus-stack
-        skipCrds: true  # Skip CRD installation as it's handled by the other app
-        valueFiles:
-          - helm/dev-charts/kube-prometheus-stack/values.yaml
-    - repoURL: 'git@github.com:ippanpeople/black_box.git'
+        skipCrds: true
+    - repoURL: 'https://github.sakura.codes/w-rin/shared-k8s-dev.git'
       targetRevision: HEAD
-      path: helm/dev-charts/kube-prometheus-stack
+      path: helm/dev-charts/kube-prometheus-stack  # ✅ 確保這個 path 是對的
       helm:
         valueFiles:
-          - values.yaml  
+          - values.yaml  # ✅ 確保這個文件存在
   destination:
     server: "https://kubernetes.default.svc"
     namespace: monitoring
