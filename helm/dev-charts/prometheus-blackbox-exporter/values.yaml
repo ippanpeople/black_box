@@ -1,0 +1,16 @@
+replicaCount: 1
+
+service:
+  type: NodePort
+  port: 9115
+  nodePort: 32000
+  name: http
+
+config:
+  modules:
+    # TLS証明書チェック用モジュール
+    ssl_cert:
+      prober: tls
+      timeout: 10s
+      tls:
+        insecure_skip_verify: false
