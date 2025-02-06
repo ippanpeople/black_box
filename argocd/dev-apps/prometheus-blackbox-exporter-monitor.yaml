@@ -14,11 +14,10 @@ spec:
       interval: 30s
       params:
         module: [http_2xx]
-      relabelings:
+      relabel_configs:
         - source_labels: [__address__]
           target_label: __param_target
         - source_labels: [__param_target]
           target_label: instance
         - target_label: __address__
           replacement: 163.43.128.7:9115
-
