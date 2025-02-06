@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: blackbox-exporter
+  name: prometheus-blackbox-exporter
   namespace: argocd
 spec:
   project: default
   sources:
     - repoURL: https://prometheus-community.github.io/helm-charts
-      chart: blackbox-exporter
-      targetRevision: 5.5.2
+      chart: prometheus-blackbox-exporter
+      targetRevision: 9.2.0
       helm:
-        releaseName: blackbox-exporter
+        releaseName: prometheus-blackbox-exporter
         skipCrds: true
         valueFiles:
-          - $values/helm/dev-charts/blackbox-exporter/values.yaml
-    - repoURL: 'git@github.com:ippanpeople/black_box.git'  
+          - $values/helm/dev-charts/prometheus-blackbox-exporter/values.yaml
+    - repoURL: 'git@github.com:ippanpeople/black_box.git'
       targetRevision: HEAD
       ref: values
   destination:
