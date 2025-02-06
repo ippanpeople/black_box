@@ -14,7 +14,9 @@ spec:
       interval: 30s
       params:
         module: [http_2xx]
-      relabel_configs:
+      path: /probe
+      scheme: http
+      relabelings:
         - source_labels: [__address__]
           target_label: __param_target
         - source_labels: [__param_target]
