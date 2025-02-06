@@ -13,4 +13,4 @@ spec:
     - port: http              
       interval: 30s
       params:
-        module: [ssl_cert]    
+        module: [http_2xx]    

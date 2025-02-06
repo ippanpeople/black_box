@@ -12,7 +12,25 @@ image:
 
 config:
   modules:
-    # TLS証明書チェック用モジュール
-    ssl_cert:
-      prober: tls
-      timeout: 10s
+    http_2xx:
+      prober: http
+      timeout: 5s
+      http:
+        valid_http_versions:
+          - HTTP/1.1
+          - HTTP/2.0
+        preferred_ip_protocol: ip4
+        ip_protocol_fallback: true
+        follow_redirects: true
+        enable_http2: true
+        tls_config:
+          insecure_skip_verify: true
+      tcp:
+        ip_protocol_fallback: true
+      icmp:
+        ip_protocol_fallback: true
+        ttl: 64
+      dns:
+        ip_protocol_fallback: true
+        recursion_desired: true
+        
