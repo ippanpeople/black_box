@@ -1,21 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: black-box-exporter
+  name: blackbox-exporter
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: git@github.com:ippanpeople/black_box.git
-    targetRevision: master
-    path: helm/dev-charts/black-box-exporter
-    helm:
-      valueFiles:
-        - values.yaml
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: blackbox-exporter
+      targetRevision: 5.5.2
+      helm:
+        releaseName: blackbox-exporter
+        skipCrds: true
+        valueFiles:
+          - $values/helm/dev-charts/blackbox-exporter/values.yaml
+    - repoURL: 'git@github.com:ippanpeople/black_box.git'  
+      targetRevision: HEAD
+      ref: values
   destination:
-    server: https://kubernetes.default.svc
+    server: "https://kubernetes.default.svc"
     namespace: monitoring
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
