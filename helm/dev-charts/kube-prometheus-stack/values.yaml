@@ -19,6 +19,9 @@ prometheus:
     serviceMonitorSelector:
       matchLabels:
         app: prometheus-blackbox-exporter
+    podMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelector: {}
+    ruleSelector: {}
   service:
     type: NodePort
     nodePort: 31000
