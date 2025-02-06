@@ -1,7 +1,7 @@
 service:
   type: NodePort
   port: 9115
-  nodePort: 32000
+  nodePort: 31559
   name: http
 
 config:
