@@ -13,15 +13,26 @@ grafana:
 prometheus:
   prometheusSpec:
     additionalScrapeConfigs:
-      name: additional-scrape-configs
-      key: additional-scrape-configs.yaml
+      - job_name: "k8s-api-cert"
+        metrics_path: /probe
+        params:
+          module: [http_2xx]
+        static_configs:
+          - targets:
+              - https://kubernetes.default.svc.cluster.local/readyz
+        relabel_configs:
+          - source_labels: [__address__]
+            target_label: __param_target
+          - source_labels: [__param_target]
+            target_label: instance
+          - target_label: __address__
+            replacement: 163.43.128.7:9115
+
+    additionalScrapeConfigsSecret: {}
     serviceMonitorSelectorNilUsesHelmValues: false
     serviceMonitorSelector:
       matchLabels:
         app: prometheus-blackbox-exporter
-    podMonitorSelectorNilUsesHelmValues: false
-    podMonitorSelector: {}
-    ruleSelector: {}
   service:
     type: NodePort
     nodePort: 31000
