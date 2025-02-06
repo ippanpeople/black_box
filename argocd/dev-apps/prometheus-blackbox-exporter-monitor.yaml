@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: k8s-api-cert-monitor
+  name: prometheus-blackbox-exporter-monitor
   namespace: monitoring
   labels:
     app: prometheus-blackbox-exporter
