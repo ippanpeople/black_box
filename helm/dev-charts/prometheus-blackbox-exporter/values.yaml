@@ -10,5 +10,6 @@ config:
     ssl_cert:
       prober: tls
       timeout: 10s
-      tls:
-        insecure_skip_verify: false
+
+extraArgs:
+  - --tls.insecure-skip-verify=true
