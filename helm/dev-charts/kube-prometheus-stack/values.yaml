@@ -44,7 +44,7 @@ prometheus:
             rules:
               - alert: SSLCertificateExpiry
                 expr: (probe_ssl_earliest_cert_expiry - time()) / 86400 < 365
-                for: 1h
+                for: 10s
                 labels:
                   severity: warning
                 annotations:
