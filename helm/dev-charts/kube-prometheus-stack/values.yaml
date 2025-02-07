@@ -16,7 +16,11 @@ prometheus:
     serviceMonitorSelector:
       matchLabels:
         app: prometheus-blackbox-exporter
-    # 配置 Prometheus 的额外采集任务
+
+    ruleSelector:
+      matchLabels:
+        prometheus: kube-prometheus-stack
+
     additionalScrapeConfigs:
       - job_name: "k8s-api-cert"
         metrics_path: /probe
@@ -33,7 +37,6 @@ prometheus:
           - target_label: __address__
             replacement: 163.43.128.7:9115
 
-    # 配置自定义告警规则
     additionalPrometheusRulesMap:
       ssl-cert-expiry-alerts:
         groups:
