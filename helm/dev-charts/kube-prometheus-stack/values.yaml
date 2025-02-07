@@ -28,6 +28,20 @@ prometheus:
           - target_label: __address__
             replacement: 163.43.128.7:9115
 
+    additionalPrometheusRulesMap:
+      ssl-cert-expiry-alerts:
+        groups:
+          - name: SSLExpiryAlerts
+            rules:
+              - alert: SSLCertificateExpiry
+                expr: (probe_ssl_earliest_cert_expiry - time()) / 86400 < 365
+                for: 1h
+                labels:
+                  severity: warning
+                annotations:
+                  summary: "SSL certificate is expiring within a year."
+                  description: "The SSL certificate for {{ $labels.instance }} is expiring in less than 365 days."
+
     additionalScrapeConfigsSecret: {}
     serviceMonitorSelectorNilUsesHelmValues: false
     serviceMonitorSelector:
