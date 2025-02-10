@@ -16,6 +16,9 @@ prometheus:
     serviceMonitorSelector:
       matchLabels:
         app: prometheus-blackbox-exporter
+  service:
+    type: NodePort
+    nodePort: 31000
 
 additionalScrapeConfigs:
   - job_name: "k8s-api-cert"
@@ -46,10 +49,6 @@ additionalPrometheusRulesMap:
             annotations:
               summary: "SSL certificate is expiring within a year."
               description: "The SSL certificate for {{ $labels.instance }} is expiring in less than 365 days."
-
-  service:
-    type: NodePort
-    nodePort: 31000
 
 alertmanager:
   enabled: true
