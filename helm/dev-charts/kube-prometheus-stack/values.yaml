@@ -42,7 +42,7 @@ additionalPrometheusRulesMap:
       - name: SSLExpiryAlerts
         rules:
           - alert: SSLCertificateExpiry
-            expr: (probe_ssl_earliest_cert_expiry - time()) / 86400 < 365
+            expr: (probe_ssl_earliest_cert_expiry - time()) / 86400 < 400
             for: 10s
             labels:
               severity: warning
