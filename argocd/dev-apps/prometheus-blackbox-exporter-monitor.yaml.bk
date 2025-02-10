@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-blackbox-exporter-monitor
+  namespace: monitoring
+  labels:
+    app: prometheus-blackbox-exporter
+spec:
+  selector:
+    matchLabels:
+      app: prometheus-blackbox-exporter
+  endpoints:
+    - port: http
+      interval: 30s
+      params:
+        module: [http_2xx]
+      path: /probe
+      scheme: http
+      relabelings:
+        - source_labels: [__address__]
+          target_label: __param_target
+        - source_labels: [__param_target]
+          target_label: instance
+        - target_label: __address__
+          replacement: 163.43.128.7:9115

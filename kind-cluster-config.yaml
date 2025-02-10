@@ -1,0 +1,19 @@
+# kind-cluster-config.yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      # Grafana 的 NodePort 30000
+      - containerPort: 30000
+        hostPort: 30000
+        protocol: TCP
+      # Prometheus 的 NodePort 31000
+      - containerPort: 31000
+        hostPort: 31000
+        protocol: TCP
+      # Blackbox Exporter 的 NodePort 32000
+      - containerPort: 31559
+        hostPort: 31559
+        protocol: TCP
+
